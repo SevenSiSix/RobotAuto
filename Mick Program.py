@@ -148,5 +148,4 @@ try:
             rijVooruit()
 
 except KeyboardInterrupt:
-    StopMotors()
     GPIO.cleanup()

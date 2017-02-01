@@ -139,8 +139,6 @@ def isObstakel(lokaleHoeDichtBij):
 '''HOOFDCODE'''
 
 try:
-    except Exception as e:
-        raise
     while True:
         rijVooruit()
         if meetAfstand <= 20:

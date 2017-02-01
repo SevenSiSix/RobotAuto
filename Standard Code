@@ -21,6 +21,11 @@ pinStuurSignaal = 17
 pinOntvangSignaal = 18
 #---------------------------------------------------------
 
+'''OP WELKE PINS ZITTEN DE LEDJES'''
+pinLED1 = 22
+pinLED2 = 23
+#----------------------------------------------------------
+
 '''FREQUENTIE VAN DE WIELEN, HOEVAAK AAN/UIT PER SECONDE'''
 frequentie = 20
 #---------------------------------------------------------
@@ -42,6 +47,9 @@ GPIO.setup(pinRechtsAchteruit, GPIO.OUT)
 
 GPIO.setup(pinStuurSignaal, GPIO.OUT)
 GPIO.setup(pinOntvangSignaal, GPIO.IN)
+
+GPIO.setup(pinLED1, GPIO.OUT)
+GPIO.setup(pinLED2, GPIO.OUT)
 #---------------------------------------------------------
 
 '''VARIABELEN VOOR AFSTANDSMETING'''

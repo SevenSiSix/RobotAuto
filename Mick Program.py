@@ -147,6 +147,6 @@ try:
         else:
             rijVooruit()
 
-except:
+except KeyboardInterrupt:
     StopMotors()
     GPIO.cleanup()

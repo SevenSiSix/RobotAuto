@@ -64,7 +64,7 @@ pinLED2 = 23
 
 '''FREQUENTIE VAN DE WIELEN, HOEVAAK AAN/UIT PER SECONDE'''
 
-frequentie = 20
+frequentie = 16
 
 #---------------------------------------------------------
 
@@ -277,20 +277,19 @@ def isObstakel(lokaleHoeDichtBij):
 
 #---------------------------------------------------------
 
-while meetAfstand < 11:
-	print "kleiner dan 11. naar voren."
-	rijVooruit()
-	
-while meetAfstand <= 4:
-	print "kleiner dan . motor uit."
-	motorsUit()
+try: 
+	while meetAfstand < 11: 
+		print "kleiner dan 11 naar voren"
+		rijVooruit()
 
-while meetAfstand > 11:
-	print "groter dan 11. 1 rechts. vooruit gaan. Anders 3 naar links"
-	Rechts() 
-	time.sleep(1)
-	if meetAfstand < 11:
-		rijVooruit()	
-	elif meetAfstand > 11:
+	while meetAfstand <= 4:
+		print "kleiner dan 4. motor uit."
+		motorsUit()
+		
+	while meetAfstand >= 11:
+		print "groter dan 11. Nu snel naar links."
 		Links()
-	time.sleep(3)
+		time.sleep(0.2)
+		
+except KeyboardInterrupt:
+	GPIO.cleanup

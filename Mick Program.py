@@ -142,7 +142,7 @@ try:
     while True:
         while isObstakel(hoeDichtBij):
             Links()
-            time.sleep(0.28)
+            time.sleep(0.2)
             print "Naar Links"
 
         rijVooruit()

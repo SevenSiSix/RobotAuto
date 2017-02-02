@@ -56,11 +56,7 @@ draaiTijdTwee = 3
 #---------------------------------------------------------
 
 '''VARIABELE VOOR RANDOMIZER'''
-linksOfRechts = 0
-draaiNaarLinks = False
-draaiNaarRechts = False
-startTijdNaarLinks = 0
-startTijdNaarRechts = 0
+canDetect = True
 #---------------------------------------------------------
 
 '''ZET PWM OP 'FREQUENTIE' '''
@@ -156,18 +152,25 @@ try:
             rijVooruit()
             time.sleep(0.1)
             naarRechtsOfLinks = random.randrange(2)
-            if isObstakel(hoeDichtBij):
+            beginDraaiTijd = time.time()
+            canDetect = True
+            if (isObstakel(hoeDichtBij) and canDetect):
                 print naarRechtsOfLinks
                 motorsUit()
                 rijAchteruit()
                 time.sleep(0.1)
+                canDetect = False
             while(isObstakel(hoeDichtBij) and naarRechtsOfLinks == 0):
                 vermijdObstakelLinks()
                 print 'IK GA NAAR LINKS'
-                time.sleep(0.01)
+                time.sleep(0.05)
+                if time.time()-beginDraaiTijd > 3:
+                    break
             while(isObstakel(hoeDichtBij) and naarRechtsOfLinks == 1):
                 vermijdObstakelRechts()
                 print 'IK GA NAAR RECHTS'
-                time.sleep(0.01)
+                time.sleep(0.05)
+                if time.time()-beginDraaiTijd > 3:
+                    break
 except KeyboardInterrupt:
     GPIO.cleanup()

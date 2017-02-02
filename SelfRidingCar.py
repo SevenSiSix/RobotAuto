@@ -163,7 +163,11 @@ try:
                 naarRechtsOfLinks = random.randrange(2)
                 while(naarRechtsOfLinks == 0):
                     vermijdObstakelLinks()
+                    if not isObstakel(hoeDichtBij):
+                        naarRechtsOfLinks == 2
                 while(naarRechtsOfLinks == 1):
                     vermijdObstakelRechts()
+                    if not isObstakel(hoeDichtBij):
+                        naarRechtsOfLinks == 2
 except KeyboardInterrupt:
     GPIO.cleanup()

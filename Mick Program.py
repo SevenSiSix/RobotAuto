@@ -142,7 +142,7 @@ try:
     while True:
         while isObstakel(hoeDichtBij):
             Links()
-            time.sleep(0.1)
+            time.sleep(0)
             GPIO.output(pinLED1, 0)
             GPIO.output(pinLED2, 1 )
 

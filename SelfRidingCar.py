@@ -148,15 +148,19 @@ try:
             rijVooruit()
             time.sleep(0.1)
             naarRechtsOfLinks = random.randrange(2)
+            GPIO.output(pinLedEen, 1)
+            GPIO.output(pinLedTwee, 1)
             print naarRechtsOfLinks
             '''ZOLANG ER EEN OBSTAKEL IS, EN naarRechtsOfLinks IS 0, DRAAI DAN NAAR LINKS (EN BLIJF DRAAIEN VOOR EEN HALVE SECONDE)'''
             while(isObstakel(hoeDichtBij) and naarRechtsOfLinks == 0):
+                GPIO.output(pinLedTwee, 0)
                 print 'IK GA NAAR LINKS'
                 vermijdObstakelLinks()
                 time.sleep(0.5)
                 motorsUit()
             '''ZOLANG ER EEN OBSTAKEL IS, EN naarRechtsOfLinks IS 1, DRAAI DAN NAAR RECHTS (EN BLIJF DRAAIEN VOOR EEN HALVE SECONDE)'''
             while(isObstakel(hoeDichtBij) and naarRechtsOfLinks == 1):
+                GPIO.output(pinLedEen, 0)
                 print 'IK GA NAAR RECHTS'
                 vermijdObstakelRechts()
                 time.sleep(0.5)

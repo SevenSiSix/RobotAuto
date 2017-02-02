@@ -135,7 +135,7 @@ try:
 		#Als de sensor wel iets oppikt (dus 1 geeft) is het een wit oppervlak
 		else:
 			print('De sensor staat boven een wit oppvervlak')
-			links()
+			Links()
 		#Check elke 0.2 seconden 
 		time.sleep(0.2)
 		

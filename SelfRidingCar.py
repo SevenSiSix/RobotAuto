@@ -158,7 +158,7 @@ try:
                 motorsUit()
                 rijAchteruit()
                 time.sleep(0.1)
-                mortorsUit()
+                motorsUit()
             while(isObstakel(hoeDichtBij) and naarRechtsOfLinks == 0):
                 vermijdObstakelLinks()
                 print 'IK GA NAAR LINKS'

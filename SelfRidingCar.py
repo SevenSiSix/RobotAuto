@@ -161,9 +161,10 @@ try:
             time.sleep(0.1)
             while(isObstakel(hoeDichtBij)):
                 naarRechtsOfLinks = random.randrange(2)
+                print naarRechtsOfLinks
                 if(naarRechtsOfLinks == 0):
                     vermijdObstakelLinks()
                 else:
-                    vermijdObstakelRechts
+                    vermijdObstakelRechts()
 except KeyboardInterrupt:
     GPIO.cleanup()

@@ -35,8 +35,8 @@ frequentie = 25
 #---------------------------------------------------------
 
 '''PROCENTEN DAT DE WIELEN AAN MOETEN STAAN'''
-rondjesLinks = 25
-rondjesRechts = 33
+rondjesLinks = 30
+rondjesRechts = 32
 #---------------------------------------------------------
 
 '''VARIABELE VOOR HET STOPPEN VAN DE AUTO'''
@@ -103,7 +103,7 @@ def rijAchteruit():
 '''FUNCTIE VOOR LINKS'''
 def Links():
     pwmMotorLinksVooruit.ChangeDutyCycle(stop)
-    pwmMotorLinksAchteruit.ChangeDutyCycle(rondjesLinks)
+    pwmMotorLinksAchteruit.ChangeDutyCycle(stop)
     pwmMotorRechtsVooruit.ChangeDutyCycle(rondjesRechts)
     pwmMotorRechtsAchteruit.ChangeDutyCycle(stop)
 #---------------------------------------------------------
@@ -142,7 +142,6 @@ try:
     while True:
         if isObstakel(hoeDichtBij):
             Links()
-            rijVooruit()
             print "Naar Links"
         else:
             rijVooruit()

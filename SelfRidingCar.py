@@ -128,11 +128,6 @@ def meetAfstand():
         StopTime = StartTime
     while GPIO.input(pinOntvangSignaal) == 1:
         StopTime = time.time()
-        
-        if StopTime-StartTime >= 0.04:
-            StopTime = StartTime
-            print 'YOU ARE TOO FAR AWAY :('
-        
     return ((StopTime-StartTime)*34326)/2
 #---------------------------------------------------------
 
@@ -143,11 +138,13 @@ def isObstakel(lokaleHoeDichtBij):
 
 '''VERMIJD OBSTAKEL NAAR LINKS'''
 def vermijdObstakelLinks():
+    motorsUit()
     Links()
 #---------------------------------------------------------
 
 '''VERMIJD OBSTAKEL NAAR RECHTS'''
 def vermijdObstakelRechts():
+    motorsUit()
     Rechts()
 #---------------------------------------------------------
 

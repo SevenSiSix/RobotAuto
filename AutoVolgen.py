@@ -278,12 +278,15 @@ def isObstakel(lokaleHoeDichtBij):
 #---------------------------------------------------------
 
 while meetAfstand < 11:
+	print "kleiner dan 11. naar voren."
 	rijVooruit()
 	
 while meetAfstand <= 4:
+	print "kleiner dan . motor uit."
 	motorsUit()
 
 while meetAfstand > 11:
+	print "groter dan 11. 1 rechts. vooruit gaan. Anders 3 naar links"
 	Rechts() 
 	time.sleep(1)
 	if meetAfstand < 11:

@@ -1,83 +1,86 @@
-import RPi.GPIO as GPIO 
-import time
+import RPi.GPIO as GPIO # Importeren GPIO
+import time     # Importeren Time
 
-
+# GPIO 
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
 
-
-pinMotorAForwards = 10
-pinMotorABackwards = 9
-pinMotorBForwards = 8
-pinMotorBBackwards = 7
+# GPIO pinnen voor sonar
 pinTrigger = 17
 pinEcho = 18
-pinLedA = 24
-pinLedB = 23
-Frequency = 35
-DutyCycleA = 30
-DutyCycleB = 30
+
+# Frequency
+Frequency = 34
+# Cycle tijd
+CycleAperc = 30
+CycleBperc = 30
+# stoppen met draaien als 0
 Stop = 0
 
-GPIO.setup(pinMotorAForwards, GPIO.OUT)
-GPIO.setup(pinMotorABackwards, GPIO.OUT)
-GPIO.setup(pinMotorBForwards, GPIO.OUT)
-GPIO.setup(pinMotorBBackwards, GPIO.OUT)
+# Motor pinnen
+pinLinksVooruit = 10
+pinLinksAchteruit = 9
+pinRechtsVooruit = 8
+pinRechtsAchteruit = 7
 
+# Output Pin
+GPIO.setup(pinLinksVooruit, GPIO.OUT)
+GPIO.setup(pinLinksAchteruit, GPIO.OUT)
+GPIO.setup(pinRechtsVooruit, GPIO.OUT)
+GPIO.setup(pinRechtsAchteruit, GPIO.OUT)
 
+# Pin output en input
 GPIO.setup(pinTrigger, GPIO.OUT)
-GPIO.setup(pinEcho, GPIO.IN)      
+GPIO.setup(pinEcho, GPIO.IN)       
 
+# Frequency
+pwmLinksVooruit = GPIO.PWM(pinLinksVooruit, Frequency)
+pwmLinksAchteruit = GPIO.PWM(pinLinksAchteruit, Frequency)
+pwmRechtsVooruit = GPIO.PWM(pinRechtsVooruit, Frequency)
+pwmRechtsAchteruit = GPIO.PWM(pinRechtsAchteruit, Frequency)
 
-GPIO.setup(pinLedA, GPIO.OUT) 
-GPIO.setup(pinLedB, GPIO.OUT)  
+# PWM cycle 0
+pwmLinksVooruit.start(Stop)
+pwmLinksAchteruit.start(Stop)
+pwmRechtsVooruit.start(Stop)
+pwmRechtsAchteruit.start(Stop)
 
-
-pwmMotorAForwards = GPIO.PWM(pinMotorAForwards, Frequency)
-pwmMotorABackwards = GPIO.PWM(pinMotorABackwards, Frequency)
-pwmMotorBForwards = GPIO.PWM(pinMotorBForwards, Frequency)
-pwmMotorBBackwards = GPIO.PWM(pinMotorBBackwards, Frequency)
-
-
-pwmMotorAForwards.start(Stop)
-pwmMotorABackwards.start(Stop)
-pwmMotorBForwards.start(Stop)
-pwmMotorBBackwards.start(Stop)
-
-
+# righting vooruit
 def Forwards(AdditionalSpeed):
-    pwmMotorAForwards.ChangeDutyCycle(DutyCycleA + AdditionalSpeed)
-    pwmMotorABackwards.ChangeDutyCycle(Stop)
-    pwmMotorBForwards.ChangeDutyCycle(DutyCycleB + AdditionalSpeed)
-    pwmMotorBBackwards.ChangeDutyCycle(Stop)
+    pwmLinksVooruit.ChangeDutyCycle(CycleAperc + AdditionalSpeed)
+    pwmLinksAchteruit.ChangeDutyCycle(Stop)
+    pwmRechtsVooruit.ChangeDutyCycle(CycleBperc + AdditionalSpeed)
+    pwmRechtsAchteruit.ChangeDutyCycle(Stop)
 
-	
+# naar achter
 def Backwards(AdditionalSpeed):
-    pwmMotorAForwards.ChangeDutyCycle(Stop)
-    pwmMotorABackwards.ChangeDutyCycle(DutyCycleA + AdditionalSpeed)
-    pwmMotorBForwards.ChangeDutyCycle(Stop)
-    pwmMotorBBackwards.ChangeDutyCycle(DutyCycleB + AdditionalSpeed)
+    pwmLinksVooruit.ChangeDutyCycle(Stop)
+    pwmLinksAchteruit.ChangeDutyCycle(CycleAperc + AdditionalSpeed)
+    pwmRechtsVooruit.ChangeDutyCycle(Stop)
+    pwmRechtsAchteruit.ChangeDutyCycle(CycleBperc + AdditionalSpeed)
 
-
+# links draaien
 def Left(AdditionalSpeed):
-    pwmMotorAForwards.ChangeDutyCycle(Stop)
-    pwmMotorABackwards.ChangeDutyCycle(DutyCycleA + AdditionalSpeed)
-    pwmMotorBForwards.ChangeDutyCycle(DutyCycleB + AdditionalSpeed)
-    pwmMotorBBackwards.ChangeDutyCycle(Stop)
+    pwmLinksVooruit.ChangeDutyCycle(Stop)
+    pwmLinksAchteruit.ChangeDutyCycle(CycleAperc + AdditionalSpeed)
+    pwmRechtsVooruit.ChangeDutyCycle(CycleBperc + AdditionalSpeed)
+    pwmRechtsAchteruit.ChangeDutyCycle(Stop)
 
-
+# rechts draaien
 def Right(AdditionalSpeed):
-    pwmMotorAForwards.ChangeDutyCycle(DutyCycleA + AdditionalSpeed)
-    pwmMotorABackwards.ChangeDutyCycle(Stop)
-    pwmMotorBForwards.ChangeDutyCycle(Stop)
-    pwmMotorBBackwards.ChangeDutyCycle(DutyCycleB + AdditionalSpeed)
+    pwmLinksVooruit.ChangeDutyCycle(CycleAperc + AdditionalSpeed)
+    pwmLinksAchteruit.ChangeDutyCycle(Stop)
+    pwmRechtsVooruit.ChangeDutyCycle(Stop)
+    pwmRechtsAchteruit.ChangeDutyCycle(CycleBperc + AdditionalSpeed)
 
+# Stoppen
 def StopMotors():
-    pwmMotorAForwards.ChangeDutyCycle(Stop)
-    pwmMotorABackwards.ChangeDutyCycle(Stop)
-    pwmMotorBForwards.ChangeDutyCycle(Stop)
-    pwmMotorBBackwards.ChangeDutyCycle(Stop)
+    pwmLinksVooruit.ChangeDutyCycle(Stop)
+    pwmLinksAchteruit.ChangeDutyCycle(Stop)
+    pwmRechtsVooruit.ChangeDutyCycle(Stop)
+    pwmRechtsAchteruit.ChangeDutyCycle(Stop)
 
+# meet de afstand
 def Measure():
     GPIO.output(pinTrigger, True)
     time.sleep(0.00001)
@@ -103,46 +106,42 @@ def Measure():
 
     return Distance
 
-
+# De code
 try:
-    
+     # Zet de trigger op False
     GPIO.output(pinTrigger, False)
 
-    
+    # ff stil
     time.sleep(0.1)
 
     
     while True:
-        print("Seeking the car")
-        GPIO.output(pinLedA, True)
-        GPIO.output(pinLedB, False)
 
-        SeekSize = 0.15 
-        SeekCount = 1 
-        MaxSeekCount = 8
+        SeekSize = 0.15 # Draaien
+        SeekCount = 1 # zoeken
+        MaxSeekCount = 8 # max zoeken
 
-        
+        # Bepalen hoelang we al aan het zoeken zijn
         while SeekCount <= MaxSeekCount:
             DistanceToObject = Measure()
             print(DistanceToObject)
-            
-            if DistanceToObject <= 65:
-                print('Within 50cm')
-                GPIO.output(pinLedB, True)
-                GPIO.output(pinLedA, False)
-                
-                if DistanceToObject <= 25:
+            # Afstandbepalen
+            if DistanceToObject <= 60:
+                print('Binnen 50cm') # het is binnen 50 cm
+
+                # langzamer gaan rijden als het dichtbij is
+                if DistanceToObject <= 24:
                     Forwards(-10)
                     time.sleep(1)
                     StopMotors()
                     continue
-                
-                if DistanceToObject >= 35:
+                # harder gaan rijden als verweg is
+                if DistanceToObject >= 34:
                     Forwards(10)
                     time.sleep(1)
                     StopMotors()
                     continue
-					
+                # snelheid
                 Forwards(0)
                 time.sleep(1)
                 StopMotors()
@@ -151,9 +150,9 @@ try:
             Left(0)
             time.sleep(SeekSize)
             StopMotors()
-            
+            # Zoek
             SeekCount += 1
 
-
+# Einde
 except KeyboardInterrupt:
     GPIO.cleanup()

@@ -137,8 +137,6 @@ try:
 		else:
 			print('De sensor staat boven een wit oppvervlak')
 			HalfLinks()
-		#Check elke 0.2 seconden 
-		time.sleep(0.2)
 		
 #Stop het script met CTRL + C 
 except KeyboardInterrupt:

@@ -146,5 +146,5 @@ try:
         else:
             rijVooruit()
 
-except:
+except KeyboardInterrupt:
     GPIO.cleanup()

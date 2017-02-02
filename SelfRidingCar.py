@@ -24,6 +24,7 @@ pinOntvangSignaal = 18
 '''OP WELKE PINS ZITTEN DE LEDS'''
 pinLedEen = 22
 pinLedTwee = 23
+#---------------------------------------------------------
 
 '''FREQUENTIE VAN DE WIELEN, HOEVAAK AAN/UIT PER SECONDE'''
 frequentie = 10
@@ -32,9 +33,6 @@ frequentie = 10
 '''PROCENTEN DAT DE WIELEN AAN MOETEN STAAN'''
 rondjesLinks = 30
 rondjesRechts = 30
-#---------------------------------------------------------
-
-'''VARIABELE VOOR HET STOPPEN VAN DE AUTO'''
 stop = 0
 #---------------------------------------------------------
 
@@ -48,11 +46,8 @@ GPIO.setup(pinStuurSignaal, GPIO.OUT)
 GPIO.setup(pinOntvangSignaal, GPIO.IN)
 #---------------------------------------------------------
 
-'''VARIABELEN VOOR AFSTANDSMETING'''
+'''VARIABELE VOOR AFSTANDSMETING'''
 hoeDichtBij = 20.0
-draaiTijdTerug = 0.25
-draaiTijdEen = 1.5
-draaiTijdTwee = 3
 #---------------------------------------------------------
 
 '''VARIABELE VOOR RANDOMIZER'''
@@ -132,19 +127,19 @@ def isObstakel(lokaleHoeDichtBij):
     return meetAfstand() < lokaleHoeDichtBij
 #---------------------------------------------------------
 
-'''VERMIJD OBSTAKEL NAAR LINKS'''
+'''VERMIJD OBSTAKEL DOOR NAAR LINKS TE DRAAIEN'''
 def vermijdObstakelLinks():
     motorsUit()
     Links()
 #---------------------------------------------------------
 
-'''VERMIJD OBSTAKEL NAAR RECHTS'''
+'''VERMIJD OBSTAKEL DOOR NAAR RECHTS TE DRAAIEN'''
 def vermijdObstakelRechts():
     motorsUit()
     Rechts()
 #---------------------------------------------------------
 
-'''HET PROGRAMMA ZELF'''
+'''HOOFDPROGRAMMA'''
 try:
     GPIO.output(pinStuurSignaal, False)
     time.sleep(0.1)
@@ -154,13 +149,13 @@ try:
             time.sleep(0.1)
             naarRechtsOfLinks = random.randrange(2)
             print naarRechtsOfLinks
-            '''ZOLANG ER EEN OBSTAKEL IS, EN naarRechtsOfLinks is 0, DRAAI DAN NAAR LINKS'''
+            '''ZOLANG ER EEN OBSTAKEL IS, EN naarRechtsOfLinks IS 0, DRAAI DAN NAAR LINKS (EN BLIJF DRAAIEN VOOR EEN HALVE SECONDE)'''
             while(isObstakel(hoeDichtBij) and naarRechtsOfLinks == 0):
                 print 'IK GA NAAR LINKS'
                 vermijdObstakelLinks()
                 time.sleep(0.5)
                 motorsUit()
-            '''ZOLANG ER EEN OBSTAKEL IS, EN naarRechtsOfLinks is 1, DRAAI DAN NAAR RECHTS'''
+            '''ZOLANG ER EEN OBSTAKEL IS, EN naarRechtsOfLinks IS 1, DRAAI DAN NAAR RECHTS (EN BLIJF DRAAIEN VOOR EEN HALVE SECONDE)'''
             while(isObstakel(hoeDichtBij) and naarRechtsOfLinks == 1):
                 print 'IK GA NAAR RECHTS'
                 vermijdObstakelRechts()

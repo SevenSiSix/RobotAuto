@@ -144,11 +144,13 @@ def isObstakel(lokaleHoeDichtBij):
 
 '''VERMIJD OBSTAKEL NAAR LINKS'''
 def vermijdObstakelLinks():
+    motorsUit()
     Links()
 #---------------------------------------------------------
 
 '''VERMIJD OBSTAKEL NAAR RECHTS'''
 def vermijdObstakelRechts():
+    motorsUit()
     Rechts()
 #---------------------------------------------------------
 

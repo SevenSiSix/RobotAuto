@@ -162,7 +162,7 @@ try:
                 StopMotors()
                 continue
 
-            Left()
+            Left(0)
             time.sleep(SeekSize)
             StopMotors()
             # Zoek teller toename met 1

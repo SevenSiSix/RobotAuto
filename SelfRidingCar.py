@@ -157,12 +157,15 @@ try:
             time.sleep(0.1)
             naarRechtsOfLinks = random.randrange(2)
             if isObstakel(hoeDichtBij):
+                print naarRechtsOfLinks
                 motorsUit()
                 rijAchteruit()
                 time.sleep(0.1)
             while(isObstakel(hoeDichtBij) and naarRechtsOfLinks == 0):
                 vermijdObstakelLinks()
+                print 'IK GA NAAR LINKS'
             while(isObstakel(hoeDichtBij) and naarRechtsOfLinks == 1):
                 vermijdObstakelRechts()
+                print 'IK GA NAAR RECHTS'
 except KeyboardInterrupt:
     GPIO.cleanup()

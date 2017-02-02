@@ -140,7 +140,7 @@ def isObstakel(lokaleHoeDichtBij):
 
 try:
     while True:
-        if isObstakel():
+        if isObstakel(hoeDichtBij):
             Links()
             rijVooruit()
         else:

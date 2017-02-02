@@ -159,7 +159,7 @@ try:
             if isObstakel(hoeDichtBij):
                 motorsUit()
                 rijAchteruit()
-                time.sleep(0.01)
+                time.sleep(0.1)
             while(isObstakel(hoeDichtBij) and naarRechtsOfLinks == 0):
                 vermijdObstakelLinks()
             while(isObstakel(hoeDichtBij) and naarRechtsOfLinks == 1):

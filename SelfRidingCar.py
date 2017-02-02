@@ -152,12 +152,15 @@ try:
             rijVooruit()
             time.sleep(0.1)
             naarRechtsOfLinks = random.randrange(2)
+            print naarRechtsOfLinks
             while(isObstakel(hoeDichtBij) and naarRechtsOfLinks == 0):
+                print 'IK GA NAAR LINKS'
                 vermijdObstakelLinks()
                 if not isObstakel(hoeDichtBij):
                     break
             while(isObstakel(hoeDichtBij) and naarRechtsOfLinks == 1):
                 vermijdObstakelRechts()
+                print 'IK GA NAAR RECHTS'
                 if not isObstakel(hoeDichtBij):
                     break
 except KeyboardInterrupt:

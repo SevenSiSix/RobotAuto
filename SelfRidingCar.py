@@ -144,13 +144,11 @@ def isObstakel(lokaleHoeDichtBij):
 
 '''VERMIJD OBSTAKEL NAAR LINKS'''
 def vermijdObstakelLinks():
-    motorsUit()
     Links()
 #---------------------------------------------------------
 
 '''VERMIJD OBSTAKEL NAAR RECHTS'''
 def vermijdObstakelRechts():
-    motorsUit()
     Rechts()
 #---------------------------------------------------------
 
@@ -161,9 +159,10 @@ try:
     while True:
             rijVooruit()
             time.sleep(0.1)
+            naarRechtsOfLinks = random.randrange(2)
             while(isObstakel(hoeDichtBij)):
-                naarRechtsOfLinks = random.randrange(2)
                 print naarRechtsOfLinks
+                motorsUit()
                 if(naarRechtsOfLinks == 0):
                     vermijdObstakelLinks()
                 else:

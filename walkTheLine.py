@@ -31,7 +31,7 @@ pinLED2 = 23
 #----------------------------------------------------------
 
 '''FREQUENTIE VAN DE WIELEN, HOEVAAK AAN/UIT PER SECONDE'''
-frequentie = 30
+frequentie = 15
 #---------------------------------------------------------
 
 '''PROCENTEN DAT DE WIELEN AAN MOETEN STAAN'''

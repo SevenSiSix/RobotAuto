@@ -118,7 +118,6 @@ def Rechts():
 
 '''FUNCITE VOOR AFSTAND METEN'''
 def meetAfstand():
-    gemiddelde_afstand = []
     GPIO.output(pinStuurSignaal, True)
     time.sleep(0.00001)
     GPIO.output(pinStuurSignaal, False)
@@ -129,11 +128,11 @@ def meetAfstand():
         StopTime = StartTime
     while GPIO.input(pinOntvangSignaal) == 1:
         StopTime = time.time()
-        '''
+        
         if StopTime-StartTime >= 0.04:
             StopTime = StartTime
             print 'YOU ARE TOO FAR AWAY :('
-        '''
+        
     return ((StopTime-StartTime)*34326)/2
 #---------------------------------------------------------
 
@@ -160,12 +159,9 @@ try:
             rijVooruit()
             time.sleep(0.1)
             naarRechtsOfLinks = random.randrange(2)
-            while(isObstakel(hoeDichtBij)):
-                print naarRechtsOfLinks
-                motorsUit()
-                if(naarRechtsOfLinks == 0):
-                    vermijdObstakelLinks()
-                else:
-                    vermijdObstakelRechts()
+            while(isObstakel(hoeDichtBij) and naarRechtsOfLinks == 0):
+                vermijdObstakelLinks()
+            while(isObstakel(hoeDichtBij) and naarRechtsOfLinks == 1):
+                vermijdObstakelRechts()
 except KeyboardInterrupt:
     GPIO.cleanup()

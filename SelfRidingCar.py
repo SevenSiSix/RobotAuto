@@ -26,11 +26,11 @@ pinLedEen = 22
 pinLedTwee = 23
 
 '''FREQUENTIE VAN DE WIELEN, HOEVAAK AAN/UIT PER SECONDE'''
-frequentie = 10
+frequentie = 5
 #---------------------------------------------------------
 
 '''PROCENTEN DAT DE WIELEN AAN MOETEN STAAN'''
-rondjesLinks = 60
+rondjesLinks = 70
 rondjesRechts = 80
 #---------------------------------------------------------
 
@@ -149,15 +149,18 @@ try:
     GPIO.output(pinStuurSignaal, False)
     time.sleep(0.1)
     while True:
+            '''ZOLANG ER GEEN OBSTAKEL IS, RIJ VOORUIT'''
             rijVooruit()
             time.sleep(0.1)
             naarRechtsOfLinks = random.randrange(2)
             print naarRechtsOfLinks
+            '''ZOLANG ER EEN OBSTAKEL IS, EN naarRechtsOfLinks is 0, DRAAI DAN NAAR LINKS'''
             while(isObstakel(hoeDichtBij) and naarRechtsOfLinks == 0):
                 print 'IK GA NAAR LINKS'
                 vermijdObstakelLinks()
                 time.sleep(0.5)
                 motorsUit()
+            '''ZOLANG ER EEN OBSTAKEL IS, EN naarRechtsOfLinks is 1, DRAAI DAN NAAR RECHTS'''
             while(isObstakel(hoeDichtBij) and naarRechtsOfLinks == 1):
                 print 'IK GA NAAR RECHTS'
                 vermijdObstakelRechts()

@@ -164,8 +164,10 @@ try:
             while(isObstakel(hoeDichtBij) and naarRechtsOfLinks == 0):
                 vermijdObstakelLinks()
                 print 'IK GA NAAR LINKS'
+                time.sleep(0.01)
             while(isObstakel(hoeDichtBij) and naarRechtsOfLinks == 1):
                 vermijdObstakelRechts()
                 print 'IK GA NAAR RECHTS'
+                time.sleep(0.01)
 except KeyboardInterrupt:
     GPIO.cleanup()

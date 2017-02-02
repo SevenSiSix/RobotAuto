@@ -140,12 +140,12 @@ def isObstakel(lokaleHoeDichtBij):
 
 try:
     while True:
-        if isObstakel(hoeDichtBij):
+        while isObstakel(hoeDichtBij):
             Links()
             print "Naar Links"
-        else:
-            rijVooruit()
-            print "Rechtdoor"
+
+        rijVooruit()
+        print "Rechtdoor"
 
 except KeyboardInterrupt:
     GPIO.cleanup()

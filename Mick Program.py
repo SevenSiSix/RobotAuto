@@ -36,7 +36,7 @@ frequentie = 25
 
 '''PROCENTEN DAT DE WIELEN AAN MOETEN STAAN'''
 rondjesLinks = 32
-rondjesRechts = 32
+rondjesRechts = 35
 #---------------------------------------------------------
 
 '''VARIABELE VOOR HET STOPPEN VAN DE AUTO'''

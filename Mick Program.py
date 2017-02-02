@@ -143,8 +143,10 @@ try:
         if isObstakel(hoeDichtBij):
             Links()
             rijVooruit()
+            print "Naar Links"
         else:
             rijVooruit()
+            print "Naar Rechts"
 
 except KeyboardInterrupt:
     GPIO.cleanup()

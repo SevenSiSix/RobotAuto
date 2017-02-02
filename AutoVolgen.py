@@ -278,18 +278,18 @@ def isObstakel(lokaleHoeDichtBij):
 #---------------------------------------------------------
 
 try: 
-	while meetAfstand < 11: 
+	while isObstakel < 11: 
 		print "kleiner dan 11 naar voren"
 		rijVooruit()
 
-	while meetAfstand <= 4:
+	while isObstakel <= 4:
 		print "kleiner dan 4. motor uit."
 		motorsUit()
 		
-	while meetAfstand >= 11:
+	while isObstakel >= 11:
 		print "groter dan 11. Nu snel naar links."
 		Links()
 		time.sleep(0.2)
 		
 except KeyboardInterrupt:
-	GPIO.cleanup
+	GPIO.cleanup()

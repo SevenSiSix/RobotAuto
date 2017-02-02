@@ -160,7 +160,7 @@ try:
             rijVooruit()
             time.sleep(0.1)
             while(isObstakel(hoeDichtBij)):
-                naarRechtsOfLinks = random.randrage(2)
+                naarRechtsOfLinks = random.randrange(2)
                 while(naarRechtsOfLinks == 0):
                     vermijdObstakelLinks()
                 while(naarRechtsOfLinks == 1):

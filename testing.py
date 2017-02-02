@@ -31,12 +31,12 @@ pinLED2 = 23
 #----------------------------------------------------------
 
 '''FREQUENTIE VAN DE WIELEN, HOEVAAK AAN/UIT PER SECONDE'''
-frequentie = 10
+frequentie = 20
 #---------------------------------------------------------
 
 '''PROCENTEN DAT DE WIELEN AAN MOETEN STAAN'''
-rondjesLinks = 67.5
-rondjesRechts = 70
+rondjesLinks = 30
+rondjesRechts = 30
 #---------------------------------------------------------
 
 '''VARIABELE VOOR HET STOPPEN VAN DE AUTO'''
@@ -59,7 +59,7 @@ GPIO.setup(pinLED2, GPIO.OUT)
 #---------------------------------------------------------
 
 '''VARIABELEN VOOR AFSTANDSMETING'''
-hoeDichtBij = 35.0
+hoeDichtBij = 15.0
 draaiTijd = 0.75
 #---------------------------------------------------------
 
@@ -103,7 +103,7 @@ def rijAchteruit():
 '''FUNCTIE VOOR LINKS'''
 def Links():
     pwmMotorLinksVooruit.ChangeDutyCycle(stop)
-    pwmMotorLinksAchteruit.ChangeDutyCycle(stop)
+    pwmMotorLinksAchteruit.ChangeDutyCycle(rondjesLinks)
     pwmMotorRechtsVooruit.ChangeDutyCycle(rondjesRechts)
     pwmMotorRechtsAchteruit.ChangeDutyCycle(stop)
 #---------------------------------------------------------
@@ -128,6 +128,9 @@ def meetAfstand():
         StopTime = StartTime
     while GPIO.input(pinOntvangSignaal) == 1:
         StopTime = time.time()
+        if StopTime-StartTime >= 0.04:
+            StopTime = StartTime
+            print 'YOU ARE TOO FAR AWAY :('
     return ((StopTime-StartTime)*34326)/2
 #---------------------------------------------------------
 
@@ -136,21 +139,8 @@ def isObstakel(lokaleHoeDichtBij):
     return meetAfstand() < lokaleHoeDichtBij
 #---------------------------------------------------------
 
-'''HOOFDCODE'''
-
-try:
-	while True:
-		#Als de sensor geen licht oppikt is het oppervlak zwart, gaat het autootje naar rechts en het rechterlampje aan
-		if GPIO.input(pinCheckLijn)==0:
-			GPIO.output(pinLED1, 1)
-			GPIO.output(pinLED2, 0)
-			Rechts()
-		#Als de sensor wel iets oppikt gaat het autootje naar links en het linker lampje aan
-		else:
-			GPIO.output(pinLED2, 1)
-			GPIO.output(pinLED1, 0)
-			HalfLinks()
-
-#Stop het script met CTRL + C
-except KeyboardInterrupt:
-	GPIO.cleanup()
+while True:
+    Rechts()
+    time.sleep(0.1)
+    Links()
+    time.sleep(0.1)

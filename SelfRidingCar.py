@@ -26,12 +26,12 @@ pinLedEen = 22
 pinLedTwee = 23
 
 '''FREQUENTIE VAN DE WIELEN, HOEVAAK AAN/UIT PER SECONDE'''
-frequentie = 15
+frequentie = 10
 #---------------------------------------------------------
 
 '''PROCENTEN DAT DE WIELEN AAN MOETEN STAAN'''
 rondjesLinks = 60
-rondjesRechts = 64
+rondjesRechts = 80
 #---------------------------------------------------------
 
 '''VARIABELE VOOR HET STOPPEN VAN DE AUTO'''

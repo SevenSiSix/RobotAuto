@@ -35,7 +35,7 @@ frequentie = 25
 #---------------------------------------------------------
 
 '''PROCENTEN DAT DE WIELEN AAN MOETEN STAAN'''
-rondjesLinks = 30
+rondjesLinks = 30.2
 rondjesRechts = 32
 #---------------------------------------------------------
 

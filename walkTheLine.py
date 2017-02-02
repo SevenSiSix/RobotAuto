@@ -129,12 +129,12 @@ def HalfRechts():
 '''DETECTEREN VAN LIJN'''
 try:
 	while True:
-		#Als de sensor geen licht oppikt is het oppervlak zwart
+		#Als de sensor geen licht oppikt is het oppervlak zwart, gaat het autootje naar rechts en het rechterlampje aan
 		if GPIO.input(pinCheckLijn)==0:
 			GPIO.output(pinLED1, 1)
 			GPIO.output(pinLED2, 0)
 			Rechts()
-		#Als de sensor wel iets oppikt (dus 1 geeft) is het een wit oppervlak
+		#Als de sensor wel iets oppikt gaat het autootje naar links en het linker lampje aan
 		else:
 			GPIO.output(pinLED2, 1)
 			GPIO.output(pinLED1, 0)

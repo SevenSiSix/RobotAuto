@@ -54,15 +54,8 @@ GPIO.setup(pinOntvangSignaal, GPIO.IN)
 
 GPIO.setup(pinCheckLijn, GPIO.IN)
 
-
 GPIO.setup(pinLED1, GPIO.OUT)
 GPIO.setup(pinLED2, GPIO.OUT)
-#---------------------------------------------------------
-
-'''VARIABELEN VOOR AFSTANDSMETING'''
-hoeDichtBij = 15.0
-draaiTijdTerug = 0.5
-turnTime = 0.75
 #---------------------------------------------------------
 
 '''ZET PWM OP 'FREQUENTIE' '''

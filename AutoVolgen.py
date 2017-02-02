@@ -277,17 +277,17 @@ def isObstakel(lokaleHoeDichtBij):
 
 #---------------------------------------------------------
 
-	while meetAfstand < 11: 
-		rijVooruit()
+while meetAfstand < 11:
+	rijVooruit()
 	
-	while meetAfstand <= 4:
-		motorsUit()
-	
-	while meetAfstand > 11:
-		Rechts() 
-		time.sleep(1)
-		if meetAfstand < 11:
-			rijVooruit()
-		elif meetAfstand > 11:
-			Links()
-			time.sleep(3)
+while meetAfstand <= 4:
+	motorsUit()
+
+while meetAfstand > 11:
+	Rechts() 
+	time.sleep(1)
+	if meetAfstand < 11:
+		rijVooruit()	
+	elif meetAfstand > 11:
+		Links()
+	time.sleep(3)

@@ -142,11 +142,13 @@ try:
     while True:
         while isObstakel(hoeDichtBij):
             Links()
-            time.sleep(0.2)
-            print "Naar Links"
+            time.sleep(0.1)
+            GPIO.output(pinLED1, 0)
+            GPIO.output(pinLED2, 1 )
 
         rijVooruit()
-        print "Rechtdoor"
+        GPIO.output(pinLED1, 1)
+        GPIO.output(pinLED2, 0)
 
 except KeyboardInterrupt:
     GPIO.cleanup()

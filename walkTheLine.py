@@ -116,6 +116,13 @@ def Rechts():
     pwmMotorLinksAchteruit.ChangeDutyCycle(stop)
     pwmMotorRechtsVooruit.ChangeDutyCycle(stop)
     pwmMotorRechtsAchteruit.ChangeDutyCycle(rondjesRechts)
+	
+	'''FUNCTIE VOOR RECHTS'''
+def HalfRechts():
+    pwmMotorLinksVooruit.ChangeDutyCycle(rondjesLinks)
+    pwmMotorLinksAchteruit.ChangeDutyCycle(stop)
+    pwmMotorRechtsVooruit.ChangeDutyCycle(stop)
+    pwmMotorRechtsAchteruit.ChangeDutyCycle(stop)
 #---------------------------------------------------------
 
 '''DETECTEREN VAN LIJN'''
@@ -124,7 +131,7 @@ try:
 		#Als de sensor geen licht oppikt is het oppervlak zwart
 		if GPIO.input(pinCheckLijn)==0:
 			print('De sensor staat boven een zwart oppervlak')
-			Rechts()
+			HalfRechts()
 		#Als de sensor wel iets oppikt (dus 1 geeft) is het een wit oppervlak
 		else:
 			print('De sensor staat boven een wit oppvervlak')

@@ -131,13 +131,13 @@ try:
 	while True:
 		#Als de sensor geen licht oppikt is het oppervlak zwart
 		if GPIO.input(pinCheckLijn)==0:
-			GPIO.output(pinLED1, true)
-			GPIO.output(pinLED2, false)
+			GPIO.output(pinLED1, 1)
+			GPIO.output(pinLED2, 0)
 			Rechts()
 		#Als de sensor wel iets oppikt (dus 1 geeft) is het een wit oppervlak
 		else:
-			GPIO.output(pinLED2, true)
-			GPIO.output(pinLED1, false)
+			GPIO.output(pinLED2, 1)
+			GPIO.output(pinLED1, 0)
 			HalfLinks()
 		
 #Stop het script met CTRL + C 

@@ -26,12 +26,12 @@ pinLedEen = 22
 pinLedTwee = 23
 
 '''FREQUENTIE VAN DE WIELEN, HOEVAAK AAN/UIT PER SECONDE'''
-frequentie = 20
+frequentie = 15
 #---------------------------------------------------------
 
 '''PROCENTEN DAT DE WIELEN AAN MOETEN STAAN'''
-rondjesLinks = 30
-rondjesRechts = 32
+rondjesLinks = 60
+rondjesRechts = 64
 #---------------------------------------------------------
 
 '''VARIABELE VOOR HET STOPPEN VAN DE AUTO'''
@@ -157,9 +157,11 @@ try:
                 print 'IK GA NAAR LINKS'
                 vermijdObstakelLinks()
                 time.sleep(0.5)
+                motorsUit()
             while(isObstakel(hoeDichtBij) and naarRechtsOfLinks == 1):
                 print 'IK GA NAAR RECHTS'
                 vermijdObstakelRechts()
                 time.sleep(0.5)
+                motorsUit()
 except KeyboardInterrupt:
     GPIO.cleanup()

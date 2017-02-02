@@ -104,7 +104,7 @@ def Links():
 #---------------------------------------------------------
 
 '''FUNCTIE VOOR HALFLINKS'''
-def Links():
+def HalfLinks():
     pwmMotorLinksVooruit.ChangeDutyCycle(stop)
     pwmMotorLinksAchteruit.ChangeDutyCycle(stop)
     pwmMotorRechtsVooruit.ChangeDutyCycle(rondjesRechts)
@@ -136,7 +136,7 @@ try:
 		#Als de sensor wel iets oppikt (dus 1 geeft) is het een wit oppervlak
 		else:
 			print('De sensor staat boven een wit oppvervlak')
-			Links()
+			HalfLinks()
 		#Check elke 0.2 seconden 
 		time.sleep(0.2)
 		

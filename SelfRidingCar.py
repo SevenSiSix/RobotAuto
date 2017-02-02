@@ -49,7 +49,7 @@ GPIO.setup(pinOntvangSignaal, GPIO.IN)
 #---------------------------------------------------------
 
 '''VARIABELEN VOOR AFSTANDSMETING'''
-hoeDichtBij = 10.0
+hoeDichtBij = 20.0
 draaiTijdTerug = 0.25
 draaiTijdEen = 1.5
 draaiTijdTwee = 3
@@ -156,12 +156,10 @@ try:
             while(isObstakel(hoeDichtBij) and naarRechtsOfLinks == 0):
                 print 'IK GA NAAR LINKS'
                 vermijdObstakelLinks()
-                if not isObstakel(hoeDichtBij):
-                    break
+                time.sleep(0.5)
             while(isObstakel(hoeDichtBij) and naarRechtsOfLinks == 1):
-                vermijdObstakelRechts()
                 print 'IK GA NAAR RECHTS'
-                if not isObstakel(hoeDichtBij):
-                    break
+                vermijdObstakelRechts()
+                time.sleep(0.5)
 except KeyboardInterrupt:
     GPIO.cleanup()

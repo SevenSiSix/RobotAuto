@@ -117,7 +117,7 @@ def Rechts():
     pwmMotorRechtsVooruit.ChangeDutyCycle(stop)
     pwmMotorRechtsAchteruit.ChangeDutyCycle(rondjesRechts)
 	
-	'''FUNCTIE VOOR RECHTS'''
+'''FUNCTIE VOOR RECHTS'''
 def HalfRechts():
     pwmMotorLinksVooruit.ChangeDutyCycle(rondjesLinks)
     pwmMotorLinksAchteruit.ChangeDutyCycle(stop)

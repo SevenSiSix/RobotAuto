@@ -59,7 +59,7 @@ GPIO.setup(pinLED2, GPIO.OUT)
 #---------------------------------------------------------
 
 '''VARIABELEN VOOR AFSTANDSMETING'''
-hoeDichtBij = 15.0
+hoeDichtBij = 5.0
 draaiTijd = 0.75
 #---------------------------------------------------------
 
@@ -140,12 +140,11 @@ def isObstakel(lokaleHoeDichtBij):
 
 try:
     while True:
-        rijVooruit()
-        if meetAfstand <= 20:
+        if isObstakel():
             Links()
             rijVooruit()
         else:
             rijVooruit()
 
-except KeyboardInterrupt:
+except:
     GPIO.cleanup()

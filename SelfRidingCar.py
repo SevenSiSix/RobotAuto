@@ -156,6 +156,10 @@ try:
             rijVooruit()
             time.sleep(0.1)
             naarRechtsOfLinks = random.randrange(2)
+            if isObstakel(hoeDichtBij):
+                motorsUit()
+                rijAchteruit()
+                time.sleep(0.01)
             while(isObstakel(hoeDichtBij) and naarRechtsOfLinks == 0):
                 vermijdObstakelLinks()
             while(isObstakel(hoeDichtBij) and naarRechtsOfLinks == 1):

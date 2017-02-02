@@ -59,7 +59,7 @@ GPIO.setup(pinLED2, GPIO.OUT)
 #---------------------------------------------------------
 
 '''VARIABELEN VOOR AFSTANDSMETING'''
-hoeDichtBij = 25.0
+hoeDichtBij = 35.0
 draaiTijd = 0.75
 #---------------------------------------------------------
 

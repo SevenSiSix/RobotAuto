@@ -44,6 +44,9 @@ GPIO.setup(pinRechtsAchteruit, GPIO.OUT)
 
 GPIO.setup(pinStuurSignaal, GPIO.OUT)
 GPIO.setup(pinOntvangSignaal, GPIO.IN)
+
+GPIO.setup(pinLedEen, GPIO.OUT)
+GPIO.setup(pinLedTwee, GPIO.OUT)
 #---------------------------------------------------------
 
 '''VARIABELE VOOR AFSTANDSMETING'''

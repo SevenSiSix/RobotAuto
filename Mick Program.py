@@ -31,12 +31,12 @@ pinLED2 = 23
 #----------------------------------------------------------
 
 '''FREQUENTIE VAN DE WIELEN, HOEVAAK AAN/UIT PER SECONDE'''
-frequentie = 20
+frequentie = 25
 #---------------------------------------------------------
 
 '''PROCENTEN DAT DE WIELEN AAN MOETEN STAAN'''
-rondjesLinks = 30
-rondjesRechts = 30
+rondjesLinks = 25
+rondjesRechts = 33
 #---------------------------------------------------------
 
 '''VARIABELE VOOR HET STOPPEN VAN DE AUTO'''

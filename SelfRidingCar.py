@@ -151,21 +151,14 @@ try:
     while True:
             rijVooruit()
             time.sleep(0.1)
-            beginDraaiTijd = time.time()
-            if (isObstakel(hoeDichtBij)):
-                naarRechtsOfLinks = 0 if random.randrange(2) == 0 else 1
-                print naarRechtsOfLinks
-                motorsUit()
-                rijAchteruit()
-                time.sleep(0.1)
-                motorsUit()
+            naarRechtsOfLinks = random.randrange(2)
             while(isObstakel(hoeDichtBij) and naarRechtsOfLinks == 0):
                 vermijdObstakelLinks()
-                print 'IK GA NAAR LINKS'
-                time.sleep(0.05)
+                if not isObstakel(hoeDichtBij):
+                    break
             while(isObstakel(hoeDichtBij) and naarRechtsOfLinks == 1):
                 vermijdObstakelRechts()
-                print 'IK GA NAAR RECHTS'
-                time.sleep(0.05)
+                if not isObstakel(hoeDichtBij):
+                    break
 except KeyboardInterrupt:
     GPIO.cleanup()

@@ -35,7 +35,7 @@ frequentie = 20
 #---------------------------------------------------------
 
 '''PROCENTEN DAT DE WIELEN AAN MOETEN STAAN'''
-rondjesLinks = 35
+rondjesLinks = 30
 rondjesRechts = 45
 #---------------------------------------------------------
 
@@ -103,6 +103,14 @@ def Links():
     pwmMotorRechtsAchteruit.ChangeDutyCycle(stop)
 #---------------------------------------------------------
 
+'''FUNCTIE VOOR HALFLINKS'''
+def Links():
+    pwmMotorLinksVooruit.ChangeDutyCycle(stop)
+    pwmMotorLinksAchteruit.ChangeDutyCycle(stop)
+    pwmMotorRechtsVooruit.ChangeDutyCycle(rondjesRechts)
+    pwmMotorRechtsAchteruit.ChangeDutyCycle(stop)
+#---------------------------------------------------------
+
 '''FUNCTIE VOOR RECHTS'''
 def Rechts():
     pwmMotorLinksVooruit.ChangeDutyCycle(rondjesLinks)
@@ -110,7 +118,7 @@ def Rechts():
     pwmMotorRechtsVooruit.ChangeDutyCycle(stop)
     pwmMotorRechtsAchteruit.ChangeDutyCycle(rondjesRechts)
 	
-'''FUNCTIE VOOR RECHTS'''
+'''FUNCTIE VOOR HALFRECHTS'''
 def HalfRechts():
     pwmMotorLinksVooruit.ChangeDutyCycle(rondjesLinks)
     pwmMotorLinksAchteruit.ChangeDutyCycle(stop)

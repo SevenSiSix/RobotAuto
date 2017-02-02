@@ -146,7 +146,7 @@ try:
             print "Naar Links"
         else:
             rijVooruit()
-            print "Naar Rechts"
+            print "Rechtdoor"
 
 except KeyboardInterrupt:
     GPIO.cleanup()

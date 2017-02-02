@@ -118,42 +118,22 @@ def Rechts():
     pwmMotorRechtsAchteruit.ChangeDutyCycle(rondjesRechts)
 #---------------------------------------------------------
 
-'''FUNCTIE VOOR AFSTAND METEN'''
-def meetAfstand():
-    GPIO.output(pinStuurSignaal, True)
-    time.sleep(0.00001)
-    GPIO.output(pinStuurSignaal, False)
-    StartTime = time.time()
-    StopTime = StartTime
-    while GPIO.input(pinOntvangSignaal) == 0:
-        StartTime = time.time()
-        StopTime = StartTime
-    while GPIO.input(pinOntvangSignaal) == 1:
-        StopTime = time.time()
-        if StopTime-StartTime >= 0.04:
-            StopTime = StartTime
-            print 'Je bent te ver weg'
-	#Berekent de afstand door tijd keer snelheid van het geluid in cm/s tedoen
-    return ((StopTime-StartTime)*34326)/2
-#---------------------------------------------------------
-
-'''DETECTEREN VAN OBSTAKEL'''
-def isObstakel(lokaleHoeDichtBij):
-    return meetAfstand() < lokaleHoeDichtBij
-#---------------------------------------------------------
-
 '''DETECTEREN VAN LIJN'''
 try:
 	while True:
 		#Als de sensor geen licht oppikt is het oppervlak zwart
 		if GPIO.input(pinCheckLijn)==0:
 			print('De sensor staat boven een zwart oppervlak')
+			Rechts()
 		#Als de sensor wel iets oppikt (dus 1 geeft) is het een wit oppervlak
 		else:
 			print('De sensor staat boven een wit oppvervlak')
+			links()
 		#Check elke 0.2 seconden 
 		time.sleep(0.2)
 		
 #Stop het script met CTRL + C 
 except KeyboardInterrupt:
 	GPIO.cleanup()
+
+

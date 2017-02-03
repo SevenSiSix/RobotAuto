@@ -24,17 +24,15 @@ pinOntvangSignaal = 18
 '''OP WELKE PINS ZITTEN DE LEDS'''
 pinLedEen = 22
 pinLedTwee = 23
+#---------------------------------------------------------
 
 '''FREQUENTIE VAN DE WIELEN, HOEVAAK AAN/UIT PER SECONDE'''
-frequentie = 30
+frequentie = 10
 #---------------------------------------------------------
 
 '''PROCENTEN DAT DE WIELEN AAN MOETEN STAAN'''
 rondjesLinks = 30
-rondjesRechts = 33
-#---------------------------------------------------------
-
-'''VARIABELE VOOR HET STOPPEN VAN DE AUTO'''
+rondjesRechts = 30
 stop = 0
 #---------------------------------------------------------
 
@@ -46,21 +44,17 @@ GPIO.setup(pinRechtsAchteruit, GPIO.OUT)
 
 GPIO.setup(pinStuurSignaal, GPIO.OUT)
 GPIO.setup(pinOntvangSignaal, GPIO.IN)
+
+GPIO.setup(pinLedEen, GPIO.OUT)
+GPIO.setup(pinLedTwee, GPIO.OUT)
 #---------------------------------------------------------
 
-'''VARIABELEN VOOR AFSTANDSMETING'''
-hoeDichtBij = 10.0
-draaiTijdTerug = 0.25
-draaiTijdEen = 1.5
-draaiTijdTwee = 3
+'''VARIABELE VOOR AFSTANDSMETING'''
+hoeDichtBij = 20.0
 #---------------------------------------------------------
 
 '''VARIABELE VOOR RANDOMIZER'''
-linksOfRechts = 0
-draaiNaarLinks = False
-draaiNaarRechts = False
-startTijdNaarLinks = 0
-startTijdNaarRechts = 0
+naarRechtsOfLinks = 0
 #---------------------------------------------------------
 
 '''ZET PWM OP 'FREQUENTIE' '''
@@ -115,6 +109,38 @@ def Rechts():
     pwmMotorRechtsVooruit.ChangeDutyCycle(stop)
     pwmMotorRechtsAchteruit.ChangeDutyCycle(rondjesRechts)
 #---------------------------------------------------------
+
+'''FUNCITE VOOR AFSTAND METEN'''
+def meetAfstand():
+    GPIO.output(pinStuurSignaal, True)
+    time.sleep(0.00001)
+    GPIO.output(pinStuurSignaal, False)
+    StartTime = time.time()
+    StopTime = StartTime
+    while GPIO.input(pinOntvangSignaal) == 0:
+        StartTime = time.time()
+        StopTime = StartTime
+    while GPIO.input(pinOntvangSignaal) == 1:
+        StopTime = time.time()
+    return ((StopTime-StartTime)*34326)/2
+#---------------------------------------------------------
+
+'''DETECTEREN VAN OBSTAKEL'''
+def isObstakel(lokaleHoeDichtBij):
+    return meetAfstand() < lokaleHoeDichtBij
+#---------------------------------------------------------
+
+'''VERMIJD OBSTAKEL DOOR NAAR LINKS TE DRAAIEN'''
+def vermijdObstakelLinks():
+    motorsUit()
+    Links()
+#---------------------------------------------------------
+
+'''VERMIJD OBSTAKEL DOOR NAAR RECHTS TE DRAAIEN'''
+def vermijdObstakelRechts():
+    motorsUit()
+    Rechts()
+#---------------------------------------------------------
 '''FUNCTIE VOOR NAAR RECHTS WAGGELEN'''
 def waggelNaarRechts():
     pwmMotorLinksVooruit.ChangeDutyCycle(rondjesLinks)
@@ -129,47 +155,15 @@ def waggelNaarLinks():
     pwmMotorLinksAchteruit.ChangeDutyCycle(stop)
     pwmMotorRechtsVooruit.ChangeDutyCycle(rondjesRechts)
     pwmMotorRechtsAchteruit.ChangeDutyCycle(stop)
-    
-'''FUNCITE VOOR AFSTAND METEN'''
-def meetAfstand():
-    GPIO.output(pinStuurSignaal, True)
-    time.sleep(0.00001)
-    GPIO.output(pinStuurSignaal, False)
-    StartTime = time.time()
-    StopTime = StartTime
-    while GPIO.input(pinOntvangSignaal) == 0:
-        StartTime = time.time()
-        StopTime = StartTime
-    while GPIO.input(pinOntvangSignaal) == 1:
-        StopTime = time.time()
-        
-        if StopTime-StartTime >= 0.04:
-            StopTime = StartTime
-            print 'YOU ARE TOO FAR AWAY :('
-        
-    return ((StopTime-StartTime)*34326)/2
 #---------------------------------------------------------
 
-'''DETECTEREN VAN OBSTAKEL'''
-def isObstakel(lokaleHoeDichtBij):
-    return meetAfstand() < lokaleHoeDichtBij
-#---------------------------------------------------------
-
-'''VERMIJD OBSTAKEL NAAR LINKS'''
-def vermijdObstakelLinks():
-    Links()
-#---------------------------------------------------------
-
-'''VERMIJD OBSTAKEL NAAR RECHTS'''
-def vermijdObstakelRechts():
-    Rechts()
-#---------------------------------------------------------
 '''GA NAAR LINKS, DAN NAAR RECHTS'''
 def waggelen(tijdNaarLinks, tijdNaarRechts):
     waggelNaarRechts()
     time.sleep(tijdNaarRechts)
     waggelNaarLinks()
     time.sleep(tijdNaarLinks)
+#---------------------------------------------------------
 
 '''HET PROGRAMMA ZELF'''
 try:

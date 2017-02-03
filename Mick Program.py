@@ -139,16 +139,17 @@ def isObstakel(lokaleHoeDichtBij):
 '''HOOFDCODE'''
 
 try:
-	while True:
-		#Naar rechts als op zwarte vlak
-		if GPIO.input(pinLichtSensor) == 0:
+    while True:
+		while GPIO.input(pinLichtSensor) == 0:
 			GPIO.output(pinLED1, 1)
 			GPIO.output(pinLED2, 0)
 			Links()
-        else:
-            GPIO.output(pinLED1, 0)
-            GPIO.output(pinLED2, 1)
-            rijVooruit()
+            print "Wit"
+
+        GPIO.output(pinLED1, 0)
+        GPIO.output(pinLED2, 1)
+        rijVooruit()
+
 
 #CTRL + C stoppen de motoren
 except KeyboardInterrupt:

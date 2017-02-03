@@ -145,6 +145,9 @@ try:
 			GPIO.output(pinLED1, 1)
 			GPIO.output(pinLED2, 0)
 			Links()
+        else:
+            GPIO.output(pinLED1, 0)
+            GPIO.output(pinLED2, 1)
 
 #CTRL + C stoppen de motoren
 except KeyboardInterrupt:

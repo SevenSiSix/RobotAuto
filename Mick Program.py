@@ -35,8 +35,8 @@ frequentie = 10
 #---------------------------------------------------------
 
 '''PROCENTEN DAT DE WIELEN AAN MOETEN STAAN'''
-rondjesLinks = 67.5
-rondjesRechts = 70
+rondjesLinks = 50
+rondjesRechts = 30
 #---------------------------------------------------------
 
 '''VARIABELE VOOR HET STOPPEN VAN DE AUTO'''
@@ -145,11 +145,6 @@ try:
 			GPIO.output(pinLED1, 1)
 			GPIO.output(pinLED2, 0)
 			Links()
-		#Naar links als op witte vlak
-		else:
-			GPIO.output(pinLED2, 1)
-			GPIO.output(pinLED1, 0)
-			Rechts()
 
 #CTRL + C stoppen de motoren
 except KeyboardInterrupt:

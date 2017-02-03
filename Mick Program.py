@@ -103,7 +103,7 @@ def rijAchteruit():
 '''FUNCTIE VOOR LINKS'''
 def Links():
     pwmMotorLinksVooruit.ChangeDutyCycle(stop)
-    pwmMotorLinksAchteruit.ChangeDutyCycle(stop)
+    pwmMotorLinksAchteruit.ChangeDutyCycle(rondjesLinks)
     pwmMotorRechtsVooruit.ChangeDutyCycle(rondjesRechts)
     pwmMotorRechtsAchteruit.ChangeDutyCycle(stop)
 #---------------------------------------------------------

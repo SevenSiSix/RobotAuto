@@ -148,6 +148,7 @@ try:
         else:
             GPIO.output(pinLED1, 0)
             GPIO.output(pinLED2, 1)
+            rijVooruit()
 
 #CTRL + C stoppen de motoren
 except KeyboardInterrupt:

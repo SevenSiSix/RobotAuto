@@ -141,7 +141,7 @@ def isObstakel(lokaleHoeDichtBij):
 try:
 	while True:
 		#Naar rechts als op zwarte vlak
-		if GPIO.input(pinCheckLijn) == 0:
+		if GPIO.input(pinLichtSensor) == 0:
 			GPIO.output(pinLED1, 1)
 			GPIO.output(pinLED2, 0)
 			Links()

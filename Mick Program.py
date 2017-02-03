@@ -143,13 +143,13 @@ try:
         if GPIO.input(pinLichtSensor) == 0:
             GPIO.output(pinLED1, 1)
             GPIO.output(pinLED2, 0)
-            rijVooruit()
+            Links()
             print "Wit"
 
         else:
             GPIO.output(pinLED1, 0)
             GPIO.output(pinLED2, 1)
-            Links()
+            rijVooruit()
             print "Zwart"
 
 

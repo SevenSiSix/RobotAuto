@@ -140,15 +140,17 @@ def isObstakel(lokaleHoeDichtBij):
 
 try:
     while True:
-		while GPIO.input(pinLichtSensor) == 0:
-			GPIO.output(pinLED1, 1)
-			GPIO.output(pinLED2, 0)
-			Links()
+		if GPIO.input(pinLichtSensor) == 0:
+            GPIO.output(pinLED1, 1)
+            GPIO.output(pinLED2, 0)
+            Links()
             print "Wit"
 
-        GPIO.output(pinLED1, 0)
-        GPIO.output(pinLED2, 1)
-        rijVooruit()
+        else:
+            GPIO.output(pinLED1, 0)
+            GPIO.output(pinLED2, 1)
+            rijVooruit()
+            print "Zwart"
 
 
 #CTRL + C stoppen de motoren

@@ -31,16 +31,22 @@ pinLED2 = 23
 #----------------------------------------------------------
 
 '''FREQUENTIE VAN DE WIELEN, HOEVAAK AAN/UIT PER SECONDE'''
-frequentie = 20
+frequentie = 10
 #---------------------------------------------------------
 
 '''PROCENTEN DAT DE WIELEN AAN MOETEN STAAN'''
-rondjesLinks = 30
+rondjesLinks = 50
 rondjesRechts = 30
 #---------------------------------------------------------
 
 '''VARIABELE VOOR HET STOPPEN VAN DE AUTO'''
 stop = 0
+#---------------------------------------------------------
+
+'''de variablen omtrent motor-snelheid'''
+snelheidWielLinks = 100
+snelheidWielRechts = 83
+snelheidMaal = .37
 #---------------------------------------------------------
 
 '''ZIJN DE PINNEN IN/OUT-PUT'''
@@ -59,7 +65,7 @@ GPIO.setup(pinLED2, GPIO.OUT)
 #---------------------------------------------------------
 
 '''VARIABELEN VOOR AFSTANDSMETING'''
-hoeDichtBij = 15.0
+hoeDichtBij = 35.0
 draaiTijd = 0.75
 #---------------------------------------------------------
 
@@ -87,33 +93,34 @@ def motorsUit():
 
 '''FUNCTIE VOOR VOORUIT'''
 def rijVooruit():
-    pwmMotorLinksVooruit.ChangeDutyCycle(rondjesLinks)
-    pwmMotorLinksAchteruit.ChangeDutyCycle(stop)
-    pwmMotorRechtsVooruit.ChangeDutyCycle(rondjesRechts)
-    pwmMotorRechtsAchteruit.ChangeDutyCycle(stop)
+    pwmMotorLinksVooruit.ChangeDutyCycle(snelheidWielLinks * snelheidMaal)
+	pwmMotorLinksAchteruit.ChangeDutyCycle(0)
+	pwmMotorRechtsVooruit.ChangeDutyCycle(snelheidWielRechts * snelheidMaal)
+	pwmMotorLinksAchteruit.ChangeDutyCycle(0)
 #---------------------------------------------------------
 
 '''FUNCTIE VOOR ACHTERUIT'''
 def rijAchteruit():
-    pwmMotorLinksVooruit.ChangeDutyCycle(stop)
-    pwmMotorLinksAchteruit.ChangeDutyCycle(rondjesLinks)
-    pwmMotorRechtsVooruit.ChangeDutyCycle(stop)
-    pwmMotorRechtsAchteruit.ChangeDutyCycle(rondjesRechts)
+    pwmMotorLinksVooruit.ChangeDutyCycle(0)
+	pwmMotorLinksAchteruit.ChangeDutyCycle(snelheidWielLinks * snelheidMaal)
+	pwmMotorRechtsVooruit.ChangeDutyCycle(0)
+	pwmMotorRechtsAchteruit.ChangeDutyCycle(snelheidWielRechts * snelheidMaal)
+#---------------------------------------------------------
 
 '''FUNCTIE VOOR LINKS'''
 def Links():
-    pwmMotorLinksVooruit.ChangeDutyCycle(stop)
-    pwmMotorLinksAchteruit.ChangeDutyCycle(rondjesLinks)
-    pwmMotorRechtsVooruit.ChangeDutyCycle(rondjesRechts)
-    pwmMotorRechtsAchteruit.ChangeDutyCycle(stop)
+    pwmMotorLinksVooruit.ChangeDutyCycle(snelheidWielLinks * snelheidMaal)
+	pwmMotorLinksAchteruit.ChangeDutyCycle(0)
+	pwmMotorRechtsVooruit.ChangeDutyCycle(0)
+	pwmMotorRechtsAchteruit.ChangeDutyCycle(snelheidWielRechts * snelheidMaal)
 #---------------------------------------------------------
 
 '''FUNCTIE VOOR RECHTS'''
 def Rechts():
-    pwmMotorLinksVooruit.ChangeDutyCycle(rondjesLinks)
-    pwmMotorLinksAchteruit.ChangeDutyCycle(stop)
-    pwmMotorRechtsVooruit.ChangeDutyCycle(stop)
-    pwmMotorRechtsAchteruit.ChangeDutyCycle(rondjesRechts)
+    pwmMotorLinksVooruit.ChangeDutyCycle(0)
+	pwmMotorLinksAchteruit.ChangeDutyCycle(snelheidWielLinks * snelheidMaal)
+	pwmMotorRechtsVooruit.ChangeDutyCycle(snelheidWielRechts * snelheidMaal)
+	pwmMotorRechtsAchteruit.ChangeDutyCycle(0)
 #---------------------------------------------------------
 
 '''FUNCITE VOOR AFSTAND METEN'''
@@ -128,9 +135,6 @@ def meetAfstand():
         StopTime = StartTime
     while GPIO.input(pinOntvangSignaal) == 1:
         StopTime = time.time()
-        if StopTime-StartTime >= 0.04:
-            StopTime = StartTime
-            print 'YOU ARE TOO FAR AWAY :('
     return ((StopTime-StartTime)*34326)/2
 #---------------------------------------------------------
 
@@ -139,8 +143,15 @@ def isObstakel(lokaleHoeDichtBij):
     return meetAfstand() < lokaleHoeDichtBij
 #---------------------------------------------------------
 
-while True:
-    Rechts()
-    time.sleep(0.1)
-    Links()
-    time.sleep(0.1)
+'''HOOFDCODE'''
+try:
+	while True:
+		if GPIO.input(pinLichtSensor) == 0:
+			rijVooruit()
+		else:
+			Links()
+
+#CTRL + C stoppen de motoren
+except KeyboardInterrupt:
+	running = False
+	GPIO.cleanup()

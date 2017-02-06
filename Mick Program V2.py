@@ -148,8 +148,12 @@ try:
 	while True:
 		if GPIO.input(pinLichtSensor) == 0:
 			rijVooruit()
+            GPIO.output(pinLED1, 0)
+            GPIO.output(pinLED2, 1)
 		else:
 			Links()
+            GPIO.output(pinLED1, 1)
+            GPIO.output(pinLED2, 0)
 
 #CTRL + C stoppen de motoren
 except KeyboardInterrupt:
